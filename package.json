@@ -1,0 +1,15 @@
+{
+  "name": "anastasia-safarova-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Сайт психолога-консультанта Анастасии Сафаровой",
+  "scripts": {
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "optimize-diplomas": "node scripts/optimize-diplomas.mjs",
+    "optimize": "npm run optimize-images && npm run optimize-diplomas",
+    "start": "npx --yes serve . -l 5173"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.3"
+  }
+}

@@ -1,0 +1,31 @@
+Анализ материалов (обновлено 02.08.2026)
+========================================
+
+ФОТО АНАСТАСИИ — на сайте
+-------------------------
+Hero:       portrait-seated-blazer → hero-seated
+Обо мне:    portrait-armchair-notebook → about-armchair
+Формат:     portrait-walking-suit → format-walking
+CTA:        portrait-standing-full → cta-standing
+Не на сайте: portrait-standing-medium (похож на CTA)
+
+ДИПЛОМЫ — переименованы пользователем и подключены
+-------------------------------------------------
+Исходники в папке «дипломы»:
+  дипломы (4).png → diploma-main-retraining.png     ОСНОВНОЙ
+  дипломы (2).png → cert-self-actualization.png
+  дипломы (3).png → cert-negative-self-attitude.png
+  дипломы (6).png → cert-self-blame.png
+  дипломы (1).png → cert-autosympathy.png
+  дипломы (7).png → cert-field-constellations.png
+  дипломы (5).png → cert-advanced-training.png
+
+Оригиналы: public/images/education/originals/
+Веб-версии: public/images/education/optimized/
+На странице education.html: крупный основной диплом + галерея
+доп. обучения с lightbox (клик / Escape / клик вне окна).
+
+ОТЗЫВЫ — не используются
+------------------------
+Скриншоты про Таро / расклады / «матрицу судьбы».
+На главной: блок «Практика только начинается».

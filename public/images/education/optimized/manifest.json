@@ -1,0 +1,37 @@
+[
+  {
+    "base": "diploma-main",
+    "width": 1400,
+    "height": 1054
+  },
+  {
+    "base": "cert-self-actualization",
+    "width": 1088,
+    "height": 1446
+  },
+  {
+    "base": "cert-negative-self-attitude",
+    "width": 1086,
+    "height": 1448
+  },
+  {
+    "base": "cert-self-blame",
+    "width": 1087,
+    "height": 1447
+  },
+  {
+    "base": "cert-autosympathy",
+    "width": 1087,
+    "height": 1446
+  },
+  {
+    "base": "cert-field-constellations",
+    "width": 1088,
+    "height": 1446
+  },
+  {
+    "base": "cert-advanced-training",
+    "width": 1400,
+    "height": 1052
+  }
+]
