@@ -1,18 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap");
 
 :root {
-  --milk: #f7f3ec;
-  --warm-white: #fbf8f3;
-  --beige: #ebe2d4;
-  --sand: #d8ccb8;
-  --taupe: #8a7d6f;
-  --sage: #8d9684;
-  --sage-deep: #6f7a68;
-  --ink: #2f2a26;
-  --ink-soft: #5a524a;
-  --line: rgba(47, 42, 38, 0.12);
-  --shadow: 0 18px 40px rgba(47, 42, 38, 0.08);
-  --radius: 18px;
+  /* Палитра с референса Tidal Portfolio */
+  --milk: #f3f0e9;
+  --warm-white: #f9f7f2;
+  --beige: #e3dbd1;
+  --sand: #b09f89;
+  --taupe: #8a8174;
+  --sage: #8ba8a1;
+  --sage-deep: #4a5d59;
+  --seafoam: #7d9e96;
+  --ink: #3d4543;
+  --ink-soft: #5c6562;
+  --line: rgba(74, 93, 89, 0.14);
+  --shadow: 0 18px 40px rgba(74, 93, 89, 0.1);
+  --radius: 22px;
   --max: 1120px;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Source Sans 3", "Segoe UI", sans-serif;
@@ -33,9 +35,10 @@ body {
   font-family: var(--font-body);
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(141, 150, 132, 0.14), transparent 34%),
-    radial-gradient(circle at 85% 12%, rgba(216, 204, 184, 0.45), transparent 28%),
-    linear-gradient(180deg, var(--warm-white), var(--milk) 42%, #f3eee5 100%);
+    radial-gradient(circle at 6% 0%, rgba(139, 168, 161, 0.3), transparent 40%),
+    radial-gradient(circle at 94% 8%, rgba(227, 219, 209, 0.85), transparent 34%),
+    radial-gradient(circle at 50% 55%, rgba(125, 158, 150, 0.1), transparent 45%),
+    linear-gradient(180deg, var(--warm-white) 0%, var(--milk) 42%, #ebe6de 78%, #e4ebe8 100%);
   line-height: 1.65;
   min-height: 100vh;
 }
@@ -80,7 +83,7 @@ a:hover {
   top: 0;
   z-index: 40;
   backdrop-filter: blur(14px);
-  background: rgba(251, 248, 243, 0.84);
+  background: rgba(249, 247, 242, 0.86);
   border-bottom: 1px solid var(--line);
 }
 
@@ -135,7 +138,7 @@ a:hover {
   justify-content: center;
   padding: 0.7rem 1.15rem;
   border-radius: 999px;
-  background: var(--ink);
+  background: var(--sage-deep);
   color: var(--warm-white) !important;
   text-decoration: none !important;
   font-weight: 600;
@@ -144,7 +147,7 @@ a:hover {
 }
 
 .nav-cta:hover {
-  background: var(--sage-deep);
+  background: var(--seafoam);
   transform: translateY(-1px);
 }
 
@@ -241,12 +244,12 @@ h3 {
 }
 
 .button-primary {
-  background: var(--ink);
+  background: var(--sage-deep);
   color: var(--warm-white);
 }
 
 .button-primary:hover {
-  background: var(--sage-deep);
+  background: var(--seafoam);
   color: var(--warm-white);
 }
 
@@ -269,17 +272,14 @@ h3 {
 .media-frame {
   position: relative;
   overflow: hidden;
-  border-radius: 28px 28px 18px 18px;
+  border-radius: 28px;
   background: var(--beige);
   box-shadow: var(--shadow);
 }
 
+/* Без оверлея на лице — раньше давал заметную полосу */
 .media-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(120deg, transparent 55%, rgba(247, 243, 236, 0.18));
+  content: none;
 }
 
 .media-frame img,
@@ -295,12 +295,12 @@ h3 {
 }
 
 .hero-media .media-frame {
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 4 / 3;
 }
 
 .hero-media img {
   object-fit: cover;
-  object-position: 78% 12%;
+  object-position: 78% 14%;
 }
 
 .section {
@@ -326,11 +326,12 @@ h3 {
 }
 
 .about-media .media-frame {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 4;
+  border-radius: 28px;
 }
 
 .about-media img {
-  object-position: 28% 18%;
+  object-position: 28% 12%;
 }
 
 .soft-list {
@@ -368,7 +369,7 @@ h3 {
   padding: 1.35rem 1.25rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(251, 248, 243, 0.72);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .topic h3 {
@@ -385,11 +386,16 @@ h3 {
 }
 
 .format-media .media-frame {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
+  border-radius: 32px;
+  max-width: 400px;
+  margin-inline: auto;
 }
 
 .format-media img {
-  object-position: 62% 16%;
+  /* Уже отзеркалено и кадрировано в assets */
+  object-fit: cover;
+  object-position: 50% 12%;
 }
 
 .steps {
@@ -442,7 +448,7 @@ h3 {
 }
 
 .price-card.featured {
-  background: linear-gradient(160deg, #efe8db, #f7f3ec 55%, #e7ecdf);
+  background: linear-gradient(160deg, #e7efec, #f7f5f0 55%, #e3dbd1);
 }
 
 .price {
@@ -478,7 +484,9 @@ h3 {
 
 .cta-grid {
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  background: linear-gradient(135deg, #efe8db, #f8f5ef 48%, #e8ece3);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(139, 168, 161, 0.22), transparent 42%),
+    linear-gradient(135deg, #e3dbd1, #f7f5f0 48%, #dce8e4);
   border-radius: 28px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -500,7 +508,7 @@ h3 {
 }
 
 .cta-media img {
-  object-position: 30% 16%;
+  object-position: 34% 12%;
 }
 
 .form-section {
@@ -519,7 +527,7 @@ h3 {
   gap: 1rem;
   padding: 1.6rem;
   border-radius: 22px;
-  background: rgba(251, 248, 243, 0.88);
+  background: #ffffff;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
@@ -581,7 +589,7 @@ h3 {
   margin: 0;
   padding: 0.9rem 1rem;
   border-radius: 14px;
-  background: #efe8db;
+  background: #e7efec;
   color: var(--ink);
 }
 
@@ -626,6 +634,7 @@ h3 {
   display: grid;
   gap: 1.4rem;
   margin-bottom: 3rem;
+  overflow: visible;
 }
 
 .edu-card {
@@ -636,7 +645,7 @@ h3 {
 }
 
 .edu-card.main {
-  background: linear-gradient(150deg, #efe8db, #f8f5ef);
+  background: linear-gradient(150deg, #e7efec, #f7f5f0);
 }
 
 .edu-meta {
@@ -650,71 +659,101 @@ h3 {
 .edu-gallery {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.1rem;
+  gap: 2.2rem 1.2rem;
+  align-items: start;
+  overflow: visible;
+  padding: 1.5rem 0.5rem 3.5rem;
 }
 
 .doc-card {
-  padding: 1rem;
-  border-radius: 18px;
+  padding: 0.7rem;
+  border-radius: 16px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.78);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.doc-card:hover,
+.doc-card:focus-within {
+  z-index: 30;
 }
 
 .doc-card h3 {
-  font-size: 1.15rem;
-  margin: 0.85rem 0 0.35rem;
+  font-size: 0.98rem;
+  margin: 0.65rem 0 0.25rem;
 }
 
 .doc-card p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .doc-trigger {
   display: block;
   width: 100%;
+  max-width: 86px;
+  margin-inline: auto;
   padding: 0;
-  border: 1px solid rgba(47, 42, 38, 0.1);
-  border-radius: 14px;
-  overflow: hidden;
-  background: #f4efe6;
+  border: none;
+  border-radius: 10px;
+  overflow: visible;
+  background: transparent;
   cursor: zoom-in;
   position: relative;
-  text-align: left;
+  text-align: center;
 }
 
 .doc-trigger img {
   width: 100%;
-  height: 260px;
+  height: 92px;
   object-fit: contain;
   object-position: center;
-  background: #f4efe6;
-  transition: transform 0.35s ease;
+  background: #eef2ef;
+  border-radius: 10px;
+  border: 1px solid rgba(74, 93, 89, 0.12);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .doc-trigger-main {
-  margin-top: 1.2rem;
+  margin-top: 1rem;
+  max-width: 220px;
+  margin-inline: auto;
 }
 
 .doc-trigger-main img {
   height: auto;
-  max-height: 420px;
+  max-height: 120px;
   object-fit: contain;
 }
 
+.doc-card:hover .doc-trigger img,
+.doc-card:focus-within .doc-trigger img,
 .doc-trigger:hover img,
 .doc-trigger:focus-visible img {
-  transform: scale(1.015);
+  transform: scale(3.1);
+  box-shadow: 0 22px 48px rgba(74, 93, 89, 0.28);
+  z-index: 5;
+  position: relative;
+}
+
+.doc-trigger-main:hover img,
+.doc-trigger-main:focus-visible img {
+  transform: scale(2.45);
 }
 
 .doc-zoom-hint {
   display: block;
-  padding: 0.65rem 0.9rem;
-  font-size: 0.9rem;
+  padding: 0.45rem 0.4rem 0;
+  font-size: 0.8rem;
   color: var(--ink-soft);
-  background: rgba(251, 248, 243, 0.92);
-  border-top: 1px solid var(--line);
+  background: transparent;
+  border-top: none;
+  text-align: center;
 }
 
 .lightbox[hidden] {
@@ -733,7 +772,7 @@ h3 {
 .lightbox-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(28, 24, 21, 0.72);
+  background: rgba(61, 69, 67, 0.72);
 }
 
 .lightbox-dialog {
@@ -831,7 +870,7 @@ h3 {
     flex-direction: column;
     align-items: stretch;
     padding: 1rem;
-    background: rgba(251, 248, 243, 0.97);
+    background: rgba(249, 247, 242, 0.97);
     border: 1px solid var(--line);
     border-radius: 18px;
     box-shadow: var(--shadow);
@@ -865,7 +904,7 @@ h3 {
   }
 
   .hero-media img {
-    object-position: 82% 8%;
+    object-position: 80% 12%;
   }
 
   .about-media .media-frame {
@@ -873,21 +912,26 @@ h3 {
   }
 
   .about-media img {
-    object-position: 32% 8%;
+    object-position: 30% 10%;
   }
 
-  .format-media .media-frame,
+  .format-media .media-frame {
+    aspect-ratio: 3 / 4;
+    max-width: 340px;
+    min-height: 0;
+  }
+
   .cta-media .media-frame {
     aspect-ratio: 4 / 5;
     min-height: 0;
   }
 
   .format-media img {
-    object-position: 70% 8%;
+    object-position: 50% 10%;
   }
 
   .cta-media img {
-    object-position: 35% 8%;
+    object-position: 36% 10%;
   }
 
   .cta-copy {
@@ -920,11 +964,55 @@ h3 {
   }
 
   .edu-gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem 0.8rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .doc-trigger {
+    max-width: 72px;
   }
 
   .doc-trigger img {
-    height: 300px;
+    height: 78px;
+  }
+
+  .doc-trigger-main {
+    max-width: 180px;
+  }
+
+  .doc-trigger-main img {
+    max-height: 96px;
+  }
+
+  .doc-card:hover .doc-trigger img,
+  .doc-card:focus-within .doc-trigger img,
+  .doc-trigger:hover img,
+  .doc-trigger:focus-visible img {
+    transform: scale(2.6);
+  }
+
+  .doc-trigger-main:hover img,
+  .doc-trigger-main:focus-visible img {
+    transform: scale(2.1);
+  }
+
+  .doc-card h3 {
+    font-size: 0.9rem;
+  }
+}
+
+@media (hover: none) {
+  .doc-card:hover .doc-trigger img,
+  .doc-trigger:hover img {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .doc-trigger:focus-visible img,
+  .doc-card:focus-within .doc-trigger img {
+    transform: scale(2.2);
+    box-shadow: 0 16px 34px rgba(74, 93, 89, 0.2);
   }
 }
 
@@ -936,10 +1024,18 @@ h3 {
   .reveal,
   .hero-copy,
   .hero-media,
-  .button {
+  .button,
+  .doc-trigger img {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
+  }
+
+  .reveal,
+  .hero-copy,
+  .hero-media,
+  .button {
     transform: none !important;
   }
+
 }

@@ -12,7 +12,7 @@ await mkdir(outDir, { recursive: true });
 
 const jobs = [
   {
-    file: "portrait-seated-blazer.png",
+    file: "portrait-seated-blazer-clean.png",
     base: "hero-seated",
     widths: [640, 960, 1280, 1672],
     quality: 86,
@@ -29,13 +29,9 @@ const jobs = [
     widths: [480, 800, 1200],
     quality: 84,
   },
-  {
-    file: "portrait-walking-suit.png",
-    base: "format-walking",
-    widths: [480, 800, 1200],
-    quality: 84,
-  },
 ];
+
+// format-walking готовится отдельно в prep-walking.mjs (зеркало + кроп)
 
 for (const job of jobs) {
   const input = path.join(srcDir, job.file);

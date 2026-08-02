@@ -5,8 +5,10 @@
   "description": "Сайт психолога-консультанта Анастасии Сафаровой",
   "scripts": {
     "optimize-images": "node scripts/optimize-images.mjs",
+    "prep-walking": "node scripts/prep-walking.mjs",
+    "retouch-hero": "node scripts/retouch-hero.mjs",
     "optimize-diplomas": "node scripts/optimize-diplomas.mjs",
-    "optimize": "npm run optimize-images && npm run optimize-diplomas",
+    "optimize": "npm run retouch-hero && npm run optimize-images && npm run prep-walking && npm run optimize-diplomas",
     "start": "npx --yes serve . -l 5173"
   },
   "devDependencies": {
