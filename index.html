@@ -35,6 +35,8 @@
 
     <main id="main">
       <section class="hero">
+        <div class="motif motif--breath" aria-hidden="true"></div>
+        <div class="motif motif--leaf" aria-hidden="true"></div>
         <div class="container hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">Онлайн · для совершеннолетних женщин</p>
@@ -54,24 +56,22 @@
                 <source
                   type="image/webp"
                   srcset="
-                    public/images/anastasia/optimized/hero-seated-640.webp 640w,
-                    public/images/anastasia/optimized/hero-seated-960.webp 960w,
-                    public/images/anastasia/optimized/hero-seated-1280.webp 1280w,
-                    public/images/anastasia/optimized/hero-seated-1672.webp 1672w
+                    public/images/anastasia/optimized/hero-tablet-640.webp 640w,
+                    public/images/anastasia/optimized/hero-tablet-960.webp 960w,
+                    public/images/anastasia/optimized/hero-tablet-1024.webp 1024w
                   "
                   sizes="(max-width: 900px) 92vw, 52vw"
                 />
                 <img
-                  src="public/images/anastasia/optimized/hero-seated-1280.jpg"
+                  src="public/images/anastasia/optimized/hero-tablet-1024.jpg"
                   srcset="
-                    public/images/anastasia/optimized/hero-seated-640.jpg 640w,
-                    public/images/anastasia/optimized/hero-seated-960.jpg 960w,
-                    public/images/anastasia/optimized/hero-seated-1280.jpg 1280w,
-                    public/images/anastasia/optimized/hero-seated-1672.jpg 1672w
+                    public/images/anastasia/optimized/hero-tablet-640.jpg 640w,
+                    public/images/anastasia/optimized/hero-tablet-960.jpg 960w,
+                    public/images/anastasia/optimized/hero-tablet-1024.jpg 1024w
                   "
                   sizes="(max-width: 900px) 92vw, 52vw"
-                  width="1280"
-                  height="720"
+                  width="1024"
+                  height="838"
                   alt="Психолог-консультант Анастасия Сафарова"
                   fetchpriority="high"
                 />
@@ -139,6 +139,7 @@
       </section>
 
       <section class="section" id="topics">
+        <div class="motif motif--bloom" aria-hidden="true"></div>
         <div class="container">
           <div class="section-head reveal">
             <p class="eyebrow">Запросы</p>
@@ -226,59 +227,27 @@
             </ol>
           </div>
           <div class="format-media reveal">
-            <div class="cutout-wrap">
-              <svg class="cutout-decor" viewBox="0 0 420 560" aria-hidden="true" focusable="false">
-                <defs>
-                  <filter id="emboss" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="0.7" result="blur" />
-                    <feOffset in="blur" dx="1.2" dy="1.4" result="shadow" />
-                    <feFlood flood-color="#4a5d59" flood-opacity="0.28" result="shadowColor" />
-                    <feComposite in="shadowColor" in2="shadow" operator="in" result="drop" />
-                    <feOffset in="blur" dx="-1" dy="-1.1" result="lightOff" />
-                    <feFlood flood-color="#ffffff" flood-opacity="0.75" result="lightColor" />
-                    <feComposite in="lightColor" in2="lightOff" operator="in" result="light" />
-                    <feMerge>
-                      <feMergeNode in="drop" />
-                      <feMergeNode in="light" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                <g filter="url(#emboss)" fill="none" stroke="#8ba8a1" stroke-linecap="round" stroke-linejoin="round">
-                  <path class="decor-curve" d="M48 118 C120 72, 210 96, 268 168 S318 310, 246 392" stroke-width="1.35" opacity="0.38" />
-                  <path class="decor-curve" d="M72 168 C150 128, 230 148, 286 228" stroke-width="0.9" opacity="0.22" />
-                  <path class="decor-curve" d="M310 70 C352 118, 368 196, 340 268" stroke-width="1.1" opacity="0.28" />
-                  <g class="decor-leaf" transform="translate(318 318) rotate(-18)" opacity="0.32">
-                    <path d="M0 42 C10 22, 16 8, 0 0 C-16 8, -10 22, 0 42 Z" fill="#8ba8a1" stroke="none" />
-                    <path d="M0 38 V6" stroke="#4a5d59" stroke-width="0.7" opacity="0.55" />
-                  </g>
-                  <g class="decor-leaf" transform="translate(52 360) rotate(28) scale(0.72)" opacity="0.22">
-                    <path d="M0 36 C9 18, 14 7, 0 0 C-14 7, -9 18, 0 36 Z" fill="#8ba8a1" stroke="none" />
-                    <path d="M0 32 V5" stroke="#4a5d59" stroke-width="0.65" opacity="0.5" />
-                  </g>
-                </g>
-              </svg>
+            <div class="media-frame">
               <picture>
                 <source
                   type="image/webp"
                   srcset="
-                    public/images/anastasia/optimized/format-studio-cutout-480.webp 480w,
-                    public/images/anastasia/optimized/format-studio-cutout-800.webp 800w,
-                    public/images/anastasia/optimized/format-studio-cutout-1200.webp 1200w
+                    public/images/anastasia/optimized/cta-arms-480.webp 480w,
+                    public/images/anastasia/optimized/cta-arms-800.webp 800w,
+                    public/images/anastasia/optimized/cta-arms-1024.webp 1024w
                   "
-                  sizes="(max-width: 900px) 70vw, 320px"
+                  sizes="(max-width: 900px) 92vw, 380px"
                 />
                 <img
-                  class="cutout-img"
-                  src="public/images/anastasia/optimized/format-studio-cutout-800.png"
+                  src="public/images/anastasia/optimized/cta-arms-1024.jpg"
                   srcset="
-                    public/images/anastasia/optimized/format-studio-cutout-480.png 480w,
-                    public/images/anastasia/optimized/format-studio-cutout-800.png 800w,
-                    public/images/anastasia/optimized/format-studio-cutout-1200.png 1200w
+                    public/images/anastasia/optimized/cta-arms-480.jpg 480w,
+                    public/images/anastasia/optimized/cta-arms-800.jpg 800w,
+                    public/images/anastasia/optimized/cta-arms-1024.jpg 1024w
                   "
-                  sizes="(max-width: 900px) 70vw, 320px"
-                  width="301"
-                  height="943"
+                  sizes="(max-width: 900px) 92vw, 380px"
+                  width="1024"
+                  height="906"
                   alt="Анастасия Сафарова"
                   loading="lazy"
                 />
@@ -295,6 +264,7 @@
       </section>
 
       <section class="section" id="pricing">
+        <div class="motif motif--leaf" aria-hidden="true"></div>
         <div class="container">
           <div class="section-head reveal">
             <p class="eyebrow">Стоимость</p>
@@ -425,6 +395,7 @@
       </section>
 
       <section class="form-section" id="booking">
+        <div class="motif motif--breath" aria-hidden="true"></div>
         <div class="container form-layout">
           <div class="reveal">
             <p class="eyebrow">Заявка</p>

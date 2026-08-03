@@ -7,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const srcDir = path.join(root, "public/images/anastasia/originals");
 const outDir = path.join(root, "public/images/anastasia/optimized");
-
 await mkdir(outDir, { recursive: true });
 
 const jobs = [
@@ -18,12 +17,6 @@ const jobs = [
     quality: 86,
   },
   {
-    file: "portrait-armchair-notebook.png",
-    base: "about-armchair",
-    widths: [480, 800, 1200],
-    quality: 84,
-  },
-  {
     file: "portrait-arms-crossed.png",
     base: "cta-arms",
     widths: [480, 800, 1024],
@@ -31,38 +24,28 @@ const jobs = [
   },
 ];
 
-// format-walking готовится отдельно в prep-walking.mjs (зеркало + кроп)
-
 for (const job of jobs) {
   const input = path.join(srcDir, job.file);
   const meta = await sharp(input).metadata();
+  console.log(`${job.file}: ${meta.width}x${meta.height}`);
 
   for (const width of job.widths) {
-    const targetWidth = Math.min(width, meta.width);
-    const outWebp = path.join(outDir, `${job.base}-${targetWidth}.webp`);
-    const outJpg = path.join(outDir, `${job.base}-${targetWidth}.jpg`);
-
+    const tw = Math.min(width, meta.width);
     const pipeline = sharp(input).resize({
-      width: targetWidth,
+      width: tw,
       withoutEnlargement: true,
       fit: "inside",
     });
 
-    await pipeline
-      .clone()
-      .webp({ quality: job.quality, effort: 5 })
-      .toFile(outWebp);
-
+    const webp = path.join(outDir, `${job.base}-${tw}.webp`);
+    const jpg = path.join(outDir, `${job.base}-${tw}.jpg`);
+    await pipeline.clone().webp({ quality: job.quality, effort: 5 }).toFile(webp);
     await pipeline
       .clone()
       .jpeg({ quality: job.quality + 4, mozjpeg: true })
-      .toFile(outJpg);
-
-    const infoWebp = await sharp(outWebp).metadata();
-    console.log(
-      `${path.basename(outWebp)} → ${infoWebp.width}x${infoWebp.height}`
-    );
+      .toFile(jpg);
+    console.log(`saved ${job.base}-${tw}`);
   }
 }
 
-console.log("Done optimizing portraits.");
+console.log("Done.");
