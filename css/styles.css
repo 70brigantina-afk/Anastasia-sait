@@ -833,7 +833,7 @@ h3 {
   gap: 2.2rem 1.2rem;
   align-items: start;
   overflow: visible;
-  padding: 2.5rem 0.5rem 4.5rem;
+  padding: 4rem 1rem 6rem;
 }
 
 .doc-card {
@@ -906,15 +906,15 @@ h3 {
 .doc-card:focus-within .doc-trigger img,
 .doc-trigger:hover img,
 .doc-trigger:focus-visible img {
-  transform: scale(2);
-  box-shadow: 0 22px 48px rgba(74, 93, 89, 0.28);
+  transform: scale(4);
+  box-shadow: 0 28px 56px rgba(74, 93, 89, 0.32);
   z-index: 5;
   position: relative;
 }
 
 .doc-trigger-main:hover img,
 .doc-trigger-main:focus-visible img {
-  transform: scale(2);
+  transform: scale(4);
 }
 
 .doc-zoom-hint {
@@ -1202,12 +1202,12 @@ h3 {
   .doc-card:focus-within .doc-trigger img,
   .doc-trigger:hover img,
   .doc-trigger:focus-visible img {
-    transform: scale(2);
+    transform: scale(4);
   }
 
   .doc-trigger-main:hover img,
   .doc-trigger-main:focus-visible img {
-    transform: scale(2);
+    transform: scale(4);
   }
 
   .doc-card h3 {
@@ -1224,7 +1224,7 @@ h3 {
 
   .doc-trigger:focus-visible img,
   .doc-card:focus-within .doc-trigger img {
-    transform: scale(2);
+    transform: scale(3.2);
     box-shadow: 0 16px 34px rgba(74, 93, 89, 0.2);
   }
 }
