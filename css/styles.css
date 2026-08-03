@@ -1057,26 +1057,14 @@ h3 {
   margin-bottom: 1.15rem;
 }
 
-.review-card__avatar {
+.review-card__photo {
   flex: 0 0 48px;
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #fff;
-  background: linear-gradient(145deg, #6f8f88, #4a5d59);
-}
-
-.review-card__avatar--soft {
-  background: linear-gradient(145deg, #9aafc0, #6d8496);
-}
-
-.review-card__avatar--warm {
-  background: linear-gradient(145deg, #b7a08a, #8a7460);
+  border-radius: 50%;
+  object-fit: cover;
+  background: #d7e2df;
+  display: block;
 }
 
 .review-card__name {
