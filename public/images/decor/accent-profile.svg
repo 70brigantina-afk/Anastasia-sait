@@ -1,30 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 280" fill="none">
-  <g stroke="#7d7468" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <!-- @>D8;L -->
-    <path d="M118 78 C128 70, 138 74, 142 86 C146 98, 144 112, 138 124 C132 136, 128 148, 130 162" stroke-width="1.35"/>
-    <path d="M118 78 C108 92, 102 112, 104 132 C106 148, 112 160, 118 172" stroke-width="1.2"/>
-    <path d="M130 96 C134 98, 136 102, 134 106" stroke-width="0.9"/>
-    <path d="M138 112 C142 114, 144 118, 142 122" stroke-width="0.85"/>
-    <path d="M128 128 C134 132, 136 138, 132 142" stroke-width="0.9"/>
-
-    <!-- >;>AK ’ ;>70 -->
-    <path d="M112 82 C90 70, 72 78, 62 98 C54 116, 58 138, 70 152" stroke-width="1.15"/>
-    <path d="M108 90 C86 88, 70 102, 66 122" stroke-width="0.85"/>
-    <path d="M70 152 C58 168, 62 188, 78 198 C92 206, 108 200, 118 188" stroke-width="1.05"/>
-
-    <!-- 8ABLO 2 2>;>A0E -->
-    <path d="M74 108 C82 96, 92 94, 88 108 C84 118, 76 118, 74 108Z" stroke-width="0.9"/>
-    <path d="M58 128 C68 118, 78 120, 72 134 C66 144, 56 140, 58 128Z" stroke-width="0.85"/>
-
-    <!-- C=0 =04 3>;>2>9 -->
-    <path d="M96 42 C108 28, 132 28, 142 46 C122 40, 108 48, 102 66 C94 56, 92 48, 96 42Z" stroke-width="1.15"/>
-
-    <!-- A:@0 -->
-    <path d="M168 58 L170 66 L178 68 L170 70 L168 78 L166 70 L158 68 L166 66Z" stroke-width="0.75"/>
-
-    <!-- (5O / ;5=B0 2=87 -->
-    <path d="M118 172 C122 196, 116 220, 108 246" stroke-width="1.1"/>
-    <path d="M108 246 C130 238, 152 252, 168 268" stroke-width="0.95"/>
-    <path d="M112 210 C128 204, 142 214, 150 228" stroke-width="0.7"/>
+  <g stroke="#8ba8a1" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M118 78 C128 70, 138 74, 142 86 C146 98, 144 112, 138 124 C132 136, 128 148, 130 162" stroke-width="1.25"/>
+    <path d="M118 78 C108 92, 102 112, 104 132 C106 148, 112 160, 118 172" stroke-width="1.1"/>
+    <path d="M130 96 C134 98, 136 102, 134 106" stroke-width="0.85"/>
+    <path d="M138 112 C142 114, 144 118, 142 122" stroke-width="0.8"/>
+    <path d="M128 128 C134 132, 136 138, 132 142" stroke-width="0.85"/>
+    <path d="M112 82 C90 70, 72 78, 62 98 C54 116, 58 138, 70 152" stroke-width="1.05"/>
+    <path d="M108 90 C86 88, 70 102, 66 122" stroke-width="0.8"/>
+    <path d="M70 152 C58 168, 62 188, 78 198 C92 206, 108 200, 118 188" stroke-width="1"/>
+    <path d="M74 108 C82 96, 92 94, 88 108 C84 118, 76 118, 74 108Z" stroke-width="0.85"/>
+    <path d="M58 128 C68 118, 78 120, 72 134 C66 144, 56 140, 58 128Z" stroke-width="0.8"/>
+    <path d="M96 42 C108 28, 132 28, 142 46 C122 40, 108 48, 102 66 C94 56, 92 48, 96 42Z" stroke-width="1.05"/>
+    <path d="M168 58 L170 66 L178 68 L170 70 L168 78 L166 70 L158 68 L166 66Z" stroke-width="0.7"/>
+    <path d="M118 172 C122 196, 116 220, 108 246" stroke-width="1"/>
+    <path d="M108 246 C130 238, 152 252, 168 268" stroke-width="0.9"/>
+    <path d="M112 210 C128 204, 142 214, 150 228" stroke-width="0.65"/>
   </g>
 </svg>
