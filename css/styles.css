@@ -44,19 +44,19 @@ body {
   position: relative;
 }
 
-/* Редкая барельеф-текстура: как «выдавлено» на фоне */
+/* Редкий ethereal-фон: лозы, луна, искры */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.42;
+  opacity: 0.2;
   background-image: url("../public/images/decor/soft-motif.svg");
-  background-size: 760px 920px;
+  background-size: 880px 1100px;
   background-repeat: repeat;
-  background-position: 8% 0;
-  mix-blend-mode: soft-light;
+  background-position: 6% 0;
+  mix-blend-mode: multiply;
 }
 
 .site-header,
@@ -66,33 +66,57 @@ main,
   z-index: 1;
 }
 
-/* Точечные акценты: дыхание / раскрытие / рост */
+/* Точечные акценты: профиль, лотос, перо, луна — едва заметно */
 .motif {
   position: absolute;
   pointer-events: none;
   z-index: 0;
   background-repeat: no-repeat;
   background-size: contain;
-  opacity: 0.55;
-  filter: contrast(1.12) brightness(0.98);
+  opacity: 0.26;
 }
 
+.motif--feather {
+  width: min(46vw, 280px);
+  height: min(28vw, 170px);
+  background-image: url("../public/images/decor/accent-feather.svg");
+}
+
+.motif--lotus {
+  width: min(26vw, 150px);
+  height: min(30vw, 170px);
+  background-image: url("../public/images/decor/accent-lotus.svg");
+}
+
+.motif--moon {
+  width: min(22vw, 120px);
+  height: min(24vw, 130px);
+  background-image: url("../public/images/decor/accent-moon.svg");
+}
+
+.motif--profile {
+  width: min(30vw, 180px);
+  height: min(38vw, 230px);
+  background-image: url("../public/images/decor/accent-profile.svg");
+}
+
+/* Совместимость со старыми классами */
 .motif--breath {
-  width: min(42vw, 260px);
-  height: min(34vw, 200px);
-  background-image: url("../public/images/decor/accent-breath.svg");
+  width: min(46vw, 280px);
+  height: min(28vw, 170px);
+  background-image: url("../public/images/decor/accent-feather.svg");
 }
 
 .motif--bloom {
-  width: min(28vw, 140px);
-  height: min(32vw, 160px);
-  background-image: url("../public/images/decor/accent-bloom.svg");
+  width: min(26vw, 150px);
+  height: min(30vw, 170px);
+  background-image: url("../public/images/decor/accent-lotus.svg");
 }
 
 .motif--leaf {
-  width: min(22vw, 110px);
-  height: min(28vw, 145px);
-  background-image: url("../public/images/decor/accent-leaf.svg");
+  width: min(22vw, 120px);
+  height: min(24vw, 130px);
+  background-image: url("../public/images/decor/accent-moon.svg");
 }
 
 .section {
@@ -227,17 +251,24 @@ a:hover {
   padding: 2.2rem 0 3.5rem;
 }
 
-.hero .motif--breath {
-  left: -2%;
-  bottom: 8%;
-  opacity: 0.5;
+.hero .motif--feather {
+  left: -4%;
+  bottom: 6%;
+  opacity: 0.24;
 }
 
-.hero .motif--leaf {
-  right: 2%;
-  top: 12%;
-  opacity: 0.48;
-  transform: rotate(18deg);
+.hero .motif--profile {
+  right: -1%;
+  top: 8%;
+  opacity: 0.22;
+  transform: scaleX(-1) rotate(4deg);
+}
+
+.hero .motif--moon {
+  left: 38%;
+  top: 4%;
+  opacity: 0.18;
+  transform: rotate(-12deg);
 }
 
 .hero-grid {
@@ -458,24 +489,50 @@ h3 {
   padding: 4.5rem 0;
 }
 
-#topics .motif--bloom {
-  right: 4%;
-  top: 1.5rem;
-  opacity: 0.52;
+#about .motif--moon {
+  right: 3%;
+  top: 2rem;
+  opacity: 0.2;
+  transform: rotate(8deg);
 }
 
-#pricing .motif--leaf {
-  left: 3%;
-  bottom: 2rem;
-  opacity: 0.48;
-  transform: rotate(-24deg);
+#topics .motif--lotus {
+  right: 3%;
+  top: 1.2rem;
+  opacity: 0.22;
 }
 
-#booking .motif--breath {
+#format .motif--feather {
+  left: -3%;
+  bottom: 1.5rem;
+  opacity: 0.2;
+  transform: scaleX(-1) rotate(-6deg);
+}
+
+#pricing .motif--moon {
+  left: 2%;
+  bottom: 1.5rem;
+  opacity: 0.2;
+  transform: rotate(-16deg);
+}
+
+#reviews .motif--profile {
+  right: -2%;
+  top: 0.5rem;
+  opacity: 0.18;
+}
+
+#booking .motif--lotus {
   right: -1%;
-  top: 3rem;
-  opacity: 0.45;
-  transform: scaleX(-1);
+  top: 2.5rem;
+  opacity: 0.2;
+  transform: rotate(10deg);
+}
+
+#booking .motif--feather {
+  left: -2%;
+  bottom: 1rem;
+  opacity: 0.18;
 }
 
 .section-head {
@@ -825,13 +882,14 @@ h3 {
 
 .footer-ask__decor {
   position: absolute;
-  inset: 18% -8% 8%;
+  inset: 12% -4% 4%;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.22;
   background:
-    radial-gradient(circle at 20% 50%, rgba(139, 168, 161, 0.18), transparent 42%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 220' fill='none'%3E%3Cpath d='M40 120 C180 40, 280 190, 420 110 S680 30, 820 130 1040 200, 1160 90' stroke='%234a5d59' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E")
-      center 55% / 120% 70% no-repeat;
+    radial-gradient(circle at 18% 45%, rgba(139, 168, 161, 0.14), transparent 40%),
+    url("../public/images/decor/accent-feather.svg") 8% 70% / min(280px, 34vw) no-repeat,
+    url("../public/images/decor/accent-lotus.svg") 92% 35% / min(120px, 16vw) no-repeat,
+    url("../public/images/decor/accent-moon.svg") 48% 18% / min(90px, 12vw) no-repeat;
 }
 
 .footer-ask__title {
@@ -1127,7 +1185,21 @@ h3 {
 }
 
 .page-hero {
+  position: relative;
   padding: 3rem 0 2rem;
+}
+
+.page-hero .motif--lotus {
+  right: 4%;
+  top: 1.5rem;
+  opacity: 0.2;
+}
+
+.page-hero .motif--moon {
+  left: 3%;
+  bottom: 0.5rem;
+  opacity: 0.18;
+  transform: rotate(-10deg);
 }
 
 .page-hero h1 {
@@ -1436,24 +1508,32 @@ h3 {
     width: min(100%, 250px);
   }
 
+  .motif--feather,
   .motif--breath {
-    width: 180px;
+    width: 170px;
+    height: 105px;
+  }
+
+  .motif--lotus,
+  .motif--bloom,
+  .motif--moon,
+  .motif--leaf {
+    width: 88px;
+    height: 100px;
+  }
+
+  .motif--profile {
+    width: 110px;
     height: 140px;
   }
 
-  .motif--bloom,
-  .motif--leaf {
-    width: 96px;
-    height: 120px;
-  }
-
   body::before {
-    opacity: 0.36;
-    background-size: 640px 780px;
+    opacity: 0.16;
+    background-size: 720px 900px;
   }
 
   .motif {
-    opacity: 0.48;
+    opacity: 0.2;
   }
 
   .about-media .media-frame {
