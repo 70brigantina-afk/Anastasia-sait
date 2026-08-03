@@ -548,13 +548,23 @@ h3 {
 }
 
 .format-media .media-frame {
-  width: min(100%, 360px);
-  aspect-ratio: 3 / 4;
+  width: min(100%, 340px);
+  aspect-ratio: auto;
+  height: auto;
   margin-inline: auto;
+  background: transparent;
+}
+
+.format-media .media-frame picture,
+.format-media .media-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .format-media img {
-  object-position: 50% 12%;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .steps {
@@ -1117,10 +1127,15 @@ h3 {
     object-position: 30% 10%;
   }
 
-  .format-media .media-frame,
   .cta-media .media-frame {
     aspect-ratio: 4 / 5;
     min-height: 0;
+  }
+
+  .format-media .media-frame {
+    width: min(100%, 300px);
+    aspect-ratio: auto;
+    height: auto;
   }
 
   .cta-media img {
@@ -1128,7 +1143,8 @@ h3 {
   }
 
   .format-media img {
-    object-position: 50% 10%;
+    object-fit: contain;
+    object-position: center bottom;
   }
 
   .cta-copy {
