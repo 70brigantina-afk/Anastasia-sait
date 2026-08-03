@@ -85,6 +85,112 @@
     });
   }
 
+  const reviewsRoot = document.querySelector("[data-reviews-carousel]");
+  if (reviewsRoot) {
+    const track = reviewsRoot.querySelector("[data-reviews-track]");
+    const slides = Array.from(reviewsRoot.querySelectorAll("[data-review-slide]"));
+    const dotsWrap = reviewsRoot.querySelector("[data-reviews-dots]");
+    let index = Math.max(
+      0,
+      slides.findIndex((slide) => slide.classList.contains("is-active"))
+    );
+    let dragStartX = 0;
+    let dragDelta = 0;
+    let dragging = false;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const renderDots = () => {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "reviews-dot" + (i === index ? " is-active" : "");
+        dot.setAttribute("aria-label", `Отзыв ${i + 1} из ${slides.length}`);
+        dot.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+    };
+
+    const update = () => {
+      if (!track || !slides.length) return;
+      const cardWidth = slides[0].offsetWidth;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const viewport = reviewsRoot.querySelector(".reviews-viewport");
+      const viewportWidth = viewport ? viewport.clientWidth : track.parentElement.clientWidth;
+      const offset = viewportWidth / 2 - cardWidth / 2 - index * (cardWidth + gap);
+      track.style.transform = `translate3d(${offset + dragDelta}px, 0, 0)`;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("is-active", i === index);
+      });
+      if (dotsWrap) {
+        dotsWrap.querySelectorAll(".reviews-dot").forEach((dot, i) => {
+          dot.classList.toggle("is-active", i === index);
+        });
+      }
+    };
+
+    const goTo = (next) => {
+      if (!slides.length) return;
+      index = (next + slides.length) % slides.length;
+      dragDelta = 0;
+      update();
+    };
+
+    renderDots();
+    update();
+    window.addEventListener("resize", update);
+
+    if (!prefersReducedMotion) {
+      track.addEventListener("pointerdown", (event) => {
+        dragging = true;
+        dragStartX = event.clientX;
+        dragDelta = 0;
+        track.classList.add("is-dragging");
+        track.setPointerCapture(event.pointerId);
+      });
+
+      track.addEventListener("pointermove", (event) => {
+        if (!dragging) return;
+        dragDelta = event.clientX - dragStartX;
+        update();
+      });
+
+      const endDrag = (event) => {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove("is-dragging");
+        const threshold = 56;
+        if (dragDelta < -threshold) goTo(index + 1);
+        else if (dragDelta > threshold) goTo(index - 1);
+        else {
+          dragDelta = 0;
+          update();
+        }
+        if (event && track.hasPointerCapture?.(event.pointerId)) {
+          track.releasePointerCapture(event.pointerId);
+        }
+      };
+
+      track.addEventListener("pointerup", endDrag);
+      track.addEventListener("pointercancel", endDrag);
+    }
+
+    reviewsRoot.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goTo(index + 1);
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goTo(index - 1);
+      }
+    });
+
+    reviewsRoot.setAttribute("tabindex", "0");
+  }
+
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const triggers = document.querySelectorAll("[data-lightbox]");
