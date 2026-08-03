@@ -823,7 +823,7 @@ h3 {
   gap: 2.2rem 1.2rem;
   align-items: start;
   overflow: visible;
-  padding: 1.5rem 0.5rem 3.5rem;
+  padding: 2.5rem 0.5rem 4.5rem;
 }
 
 .doc-card {
@@ -896,7 +896,7 @@ h3 {
 .doc-card:focus-within .doc-trigger img,
 .doc-trigger:hover img,
 .doc-trigger:focus-visible img {
-  transform: scale(3.1);
+  transform: scale(2);
   box-shadow: 0 22px 48px rgba(74, 93, 89, 0.28);
   z-index: 5;
   position: relative;
@@ -904,7 +904,7 @@ h3 {
 
 .doc-trigger-main:hover img,
 .doc-trigger-main:focus-visible img {
-  transform: scale(2.45);
+  transform: scale(2);
 }
 
 .doc-zoom-hint {
@@ -927,34 +927,38 @@ h3 {
   z-index: 80;
   display: grid;
   place-items: center;
-  padding: 1.2rem;
+  padding: 0;
 }
 
 .lightbox-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(61, 69, 67, 0.72);
+  background: rgba(20, 24, 23, 0.92);
 }
 
 .lightbox-dialog {
   position: relative;
   z-index: 1;
-  width: min(100%, 980px);
-  max-height: calc(100vh - 2.4rem);
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   overflow: auto;
-  background: var(--warm-white);
-  border-radius: 18px;
-  padding: 1rem;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  display: grid;
+  place-items: center;
 }
 
 .lightbox-close {
-  position: sticky;
-  top: 0;
-  float: right;
-  z-index: 2;
-  border: 1px solid var(--line);
-  background: var(--warm-white);
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(249, 247, 242, 0.95);
   border-radius: 999px;
   padding: 0.55rem 0.95rem;
   font: inherit;
@@ -963,10 +967,13 @@ h3 {
 
 .lightbox-image {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
-  margin-top: 0.4rem;
-  border-radius: 10px;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -1179,12 +1186,12 @@ h3 {
   .doc-card:focus-within .doc-trigger img,
   .doc-trigger:hover img,
   .doc-trigger:focus-visible img {
-    transform: scale(2.6);
+    transform: scale(2);
   }
 
   .doc-trigger-main:hover img,
   .doc-trigger-main:focus-visible img {
-    transform: scale(2.1);
+    transform: scale(2);
   }
 
   .doc-card h3 {
@@ -1201,7 +1208,7 @@ h3 {
 
   .doc-trigger:focus-visible img,
   .doc-card:focus-within .doc-trigger img {
-    transform: scale(2.2);
+    transform: scale(2);
     box-shadow: 0 16px 34px rgba(74, 93, 89, 0.2);
   }
 }
