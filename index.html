@@ -38,10 +38,10 @@
         <div class="container hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">Онлайн · для совершеннолетних женщин</p>
-            <h1>Анастасия Сафарова</h1>
+            <h1>Когда внутри шумно, а снаружи нужно выглядеть сильной</h1>
             <p class="lead">
-              Психолог-консультант. Спокойное пространство, где можно разобраться в себе,
-              снизить внутреннее напряжение и найти опору в важных решениях.
+              Спокойное пространство, где можно выдохнуть, разобраться в себе и найти опору —
+              без давления и обещаний «быстрых решений».
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#booking">Записаться на знакомство</a>
@@ -131,6 +131,9 @@
               Я не консультирую мужчин, детей, подростков и пары.
               <a href="education.html">Документы об образовании</a>
             </p>
+            <div class="section-cta">
+              <a class="button button-primary" href="#booking">Хочу записаться на знакомство</a>
+            </div>
           </div>
         </div>
       </section>
@@ -170,6 +173,10 @@
               <h3>Поддержка в кризисе</h3>
               <p>Бережное сопровождение в период неопределённости, потерь или сильных переживаний.</p>
             </article>
+          </div>
+          <div class="section-cta reveal">
+            <p>Если узнали себя хотя бы в одном пункте — можно начать с короткого знакомства.</p>
+            <a class="button button-primary" href="#booking">Записаться на встречу-знакомство</a>
           </div>
         </div>
       </section>
@@ -219,32 +226,70 @@
             </ol>
           </div>
           <div class="format-media reveal">
-            <div class="media-frame">
+            <div class="cutout-wrap">
+              <svg class="cutout-decor" viewBox="0 0 420 560" aria-hidden="true" focusable="false">
+                <defs>
+                  <filter id="emboss" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="0.7" result="blur" />
+                    <feOffset in="blur" dx="1.2" dy="1.4" result="shadow" />
+                    <feFlood flood-color="#4a5d59" flood-opacity="0.28" result="shadowColor" />
+                    <feComposite in="shadowColor" in2="shadow" operator="in" result="drop" />
+                    <feOffset in="blur" dx="-1" dy="-1.1" result="lightOff" />
+                    <feFlood flood-color="#ffffff" flood-opacity="0.75" result="lightColor" />
+                    <feComposite in="lightColor" in2="lightOff" operator="in" result="light" />
+                    <feMerge>
+                      <feMergeNode in="drop" />
+                      <feMergeNode in="light" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <g filter="url(#emboss)" fill="none" stroke="#8ba8a1" stroke-linecap="round" stroke-linejoin="round">
+                  <path class="decor-curve" d="M48 118 C120 72, 210 96, 268 168 S318 310, 246 392" stroke-width="1.35" opacity="0.38" />
+                  <path class="decor-curve" d="M72 168 C150 128, 230 148, 286 228" stroke-width="0.9" opacity="0.22" />
+                  <path class="decor-curve" d="M310 70 C352 118, 368 196, 340 268" stroke-width="1.1" opacity="0.28" />
+                  <g class="decor-leaf" transform="translate(318 318) rotate(-18)" opacity="0.32">
+                    <path d="M0 42 C10 22, 16 8, 0 0 C-16 8, -10 22, 0 42 Z" fill="#8ba8a1" stroke="none" />
+                    <path d="M0 38 V6" stroke="#4a5d59" stroke-width="0.7" opacity="0.55" />
+                  </g>
+                  <g class="decor-leaf" transform="translate(52 360) rotate(28) scale(0.72)" opacity="0.22">
+                    <path d="M0 36 C9 18, 14 7, 0 0 C-14 7, -9 18, 0 36 Z" fill="#8ba8a1" stroke="none" />
+                    <path d="M0 32 V5" stroke="#4a5d59" stroke-width="0.65" opacity="0.5" />
+                  </g>
+                </g>
+              </svg>
               <picture>
                 <source
                   type="image/webp"
                   srcset="
-                    public/images/anastasia/optimized/format-walking-480.webp 480w,
-                    public/images/anastasia/optimized/format-walking-800.webp 800w,
-                    public/images/anastasia/optimized/format-walking-1200.webp 1200w
+                    public/images/anastasia/optimized/format-studio-cutout-480.webp 480w,
+                    public/images/anastasia/optimized/format-studio-cutout-800.webp 800w,
+                    public/images/anastasia/optimized/format-studio-cutout-1200.webp 1200w
                   "
-                  sizes="(max-width: 900px) 92vw, 40vw"
+                  sizes="(max-width: 900px) 70vw, 320px"
                 />
                 <img
-                  src="public/images/anastasia/optimized/format-walking-800.jpg"
+                  class="cutout-img"
+                  src="public/images/anastasia/optimized/format-studio-cutout-800.png"
                   srcset="
-                    public/images/anastasia/optimized/format-walking-480.jpg 480w,
-                    public/images/anastasia/optimized/format-walking-800.jpg 800w,
-                    public/images/anastasia/optimized/format-walking-1200.jpg 1200w
+                    public/images/anastasia/optimized/format-studio-cutout-480.png 480w,
+                    public/images/anastasia/optimized/format-studio-cutout-800.png 800w,
+                    public/images/anastasia/optimized/format-studio-cutout-1200.png 1200w
                   "
-                  sizes="(max-width: 900px) 92vw, 40vw"
-                  width="800"
-                  height="919"
+                  sizes="(max-width: 900px) 70vw, 320px"
+                  width="301"
+                  height="943"
                   alt="Анастасия Сафарова"
                   loading="lazy"
                 />
               </picture>
             </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="section-cta reveal">
+            <p>Можно начать с бесплатной встречи-знакомства — без обязательств.</p>
+            <a class="button button-primary" href="#booking">Записаться на знакомство</a>
           </div>
         </div>
       </section>
@@ -305,6 +350,10 @@
               возврат оплаты. Экстренные обстоятельства рассматриваются отдельно.
             </p>
           </div>
+          <div class="section-cta reveal">
+            <p>Готовы попробовать формат? Начните с короткого знакомства.</p>
+            <a class="button button-primary" href="#booking">Оставить заявку</a>
+          </div>
         </div>
       </section>
 
@@ -318,6 +367,9 @@
               стартовая стоимость. В дальнейшем здесь появятся отзывы, опубликованные с разрешения
               клиенток и без личных подробностей.
             </p>
+            <div class="section-cta">
+              <a class="button button-primary" href="#booking">Стать одной из первых клиенток</a>
+            </div>
           </div>
         </div>
       </section>

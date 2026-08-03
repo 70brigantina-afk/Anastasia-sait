@@ -12,6 +12,12 @@
     "start": "npx --yes serve . -l 5173"
   },
   "devDependencies": {
-    "sharp": "^0.34.3"
+    "@imgly/background-removal-node": "^1.4.5",
+    "sharp": "^0.34.5"
+  },
+  "allowScripts": {
+    "onnxruntime-node@1.17.3": true,
+    "sharp@0.32.6": true,
+    "sharp@0.34.5": true
   }
 }

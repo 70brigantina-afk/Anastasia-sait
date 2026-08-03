@@ -17,24 +17,24 @@ const meta = await sharp(src).metadata();
 const w = meta.width;
 const h = meta.height;
 
-async function softPatch(leftRatio, topRatio, wRatio, hRatio, blur = 4.5) {
-  const left = Math.round(w * leftRatio);
-  const top = Math.round(h * topRatio);
-  const width = Math.round(w * wRatio);
-  const height = Math.round(h * hRatio);
+async function softPatch(leftRatio, topRatio, wRatio, hRatio, blur = 5, opacity = 0.95) {
+  const left = Math.max(0, Math.round(w * leftRatio));
+  const top = Math.max(0, Math.round(h * topRatio));
+  const width = Math.min(Math.round(w * wRatio), w - left);
+  const height = Math.min(Math.round(h * hRatio), h - top);
 
   const patch = await sharp(src)
     .extract({ left, top, width, height })
     .blur(blur)
-    .modulate({ brightness: 1.02, saturation: 0.98 })
+    .modulate({ brightness: 1.03, saturation: 0.96 })
     .toBuffer();
 
   const svg = Buffer.from(`
 <svg width="${width}" height="${height}">
   <defs>
-    <radialGradient id="g" cx="50%" cy="48%" r="58%">
-      <stop offset="0%" stop-color="white" stop-opacity="0.95"/>
-      <stop offset="55%" stop-color="white" stop-opacity="0.7"/>
+    <radialGradient id="g" cx="50%" cy="45%" r="68%">
+      <stop offset="0%" stop-color="white" stop-opacity="${opacity}"/>
+      <stop offset="55%" stop-color="white" stop-opacity="${opacity * 0.75}"/>
       <stop offset="100%" stop-color="white" stop-opacity="0"/>
     </radialGradient>
   </defs>
@@ -51,9 +51,23 @@ async function softPatch(leftRatio, topRatio, wRatio, hRatio, blur = 4.5) {
 }
 
 const composites = [
-  await softPatch(0.6, 0.05, 0.28, 0.15, 5),
-  await softPatch(0.63, 0.08, 0.22, 0.1, 3.2),
+  // Тонкая горизонтальная полоса справа на лбу
+  await softPatch(0.69, 0.085, 0.2, 0.035, 10, 1),
+  await softPatch(0.7, 0.07, 0.18, 0.06, 7, 0.95),
+  await softPatch(0.72, 0.05, 0.16, 0.1, 5.5, 0.9),
+  await softPatch(0.66, 0.06, 0.22, 0.12, 4.5, 0.85),
+  await softPatch(0.74, 0.09, 0.12, 0.05, 8, 1),
 ];
 
 await sharp(src).composite(composites).png().toFile(out);
-console.log("Stronger forehead retouch saved");
+
+// Re-optimize hero only
+const clean = out;
+const opt = path.join(root, "public/images/anastasia/optimized");
+for (const width of [640, 960, 1280, 1672]) {
+  const pipeline = sharp(clean).resize({ width, withoutEnlargement: true, fit: "inside" });
+  await pipeline.clone().webp({ quality: 86 }).toFile(path.join(opt, `hero-seated-${width}.webp`));
+  await pipeline.clone().jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(opt, `hero-seated-${width}.jpg`));
+}
+
+console.log("Aggressive forehead fix + hero rebuild done");
