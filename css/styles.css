@@ -548,13 +548,13 @@ h3 {
 }
 
 .format-media .media-frame {
-  width: min(100%, 380px);
-  aspect-ratio: 5 / 4;
+  width: min(100%, 360px);
+  aspect-ratio: 3 / 4;
   margin-inline: auto;
 }
 
 .format-media img {
-  object-position: 55% 16%;
+  object-position: 50% 12%;
 }
 
 .steps {
@@ -1121,7 +1121,7 @@ h3 {
   }
 
   .format-media img {
-    object-position: 55% 14%;
+    object-position: 50% 10%;
   }
 
   .cta-copy {
