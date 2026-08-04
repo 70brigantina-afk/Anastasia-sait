@@ -1097,14 +1097,22 @@ h3 {
 
 .topics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 1.55rem 1.8rem;
   width: min(100%, 56rem);
   align-items: stretch;
 }
 
-.topics .topic:last-child {
-  grid-column: 2;
+.topics .topic {
+  grid-column: span 2;
+}
+
+.topics .topic:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.topics .topic:nth-child(5) {
+  grid-column: 4 / span 2;
 }
 
 .topic {
@@ -2377,6 +2385,12 @@ button.footer-card {
     gap: 1.25rem 1.4rem;
   }
 
+  .topics .topic,
+  .topics .topic:nth-child(4),
+  .topics .topic:nth-child(5) {
+    grid-column: auto;
+  }
+
   .topics .topic:last-child {
     grid-column: 1 / -1;
     width: calc((100% - 1.4rem) / 2);
@@ -2512,6 +2526,9 @@ button.footer-card {
     gap: 1.1rem;
   }
 
+  .topics .topic,
+  .topics .topic:nth-child(4),
+  .topics .topic:nth-child(5),
   .topics .topic:last-child {
     grid-column: auto;
     width: auto;
