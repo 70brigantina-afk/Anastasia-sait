@@ -1,0 +1,55 @@
+{
+  "note": "Не для публичной сборки. Публиковать только после ответа «Разрешаю»/«Согласна» и скрина в consents/reviews/.",
+  "items": [
+    {
+      "id": "svetlana-v",
+      "displayNameProposed": "Светлана В.",
+      "direction": "psychological_consultation",
+      "directionConfirmed": true,
+      "permissionStatus": "missing",
+      "avatarAllowed": false,
+      "original": "public/images/reviews/originals/review-svetlana-v.jpg",
+      "text": "Огромное спасибо за консультацию, развод с мужем был тяжёлый, Ваша поддержка и помощь были своевременной и квалифицированной!"
+    },
+    {
+      "id": "elena-v",
+      "displayNameProposed": "Елена В.",
+      "direction": "psychological_consultation",
+      "directionConfirmed": true,
+      "permissionStatus": "missing",
+      "avatarAllowed": false,
+      "original": "public/images/reviews/originals/review-elena-v.jpg",
+      "text": "Добрый вечер, Анастасия! После сессии — камень с души. Наконец поняла, чего хочу на самом деле. Огромное спасибо!"
+    },
+    {
+      "id": "yana-a",
+      "displayNameProposed": "Яна А.",
+      "direction": "unclear",
+      "directionConfirmed": false,
+      "permissionStatus": "missing",
+      "avatarAllowed": false,
+      "original": "public/images/reviews/originals/",
+      "text": "хранится в originals; не публиковать"
+    },
+    {
+      "id": "irina",
+      "displayNameProposed": "Ирина",
+      "direction": "unclear",
+      "directionConfirmed": false,
+      "permissionStatus": "missing",
+      "avatarAllowed": false,
+      "original": "public/images/reviews/originals/",
+      "text": "хранится в originals; не публиковать"
+    },
+    {
+      "id": "olga",
+      "displayNameProposed": "Ольга",
+      "direction": "unclear",
+      "directionConfirmed": false,
+      "permissionStatus": "missing",
+      "avatarAllowed": false,
+      "original": "public/images/reviews/originals/",
+      "text": "хранится в originals; не публиковать"
+    }
+  ]
+}

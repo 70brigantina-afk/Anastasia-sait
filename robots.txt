@@ -1,4 +1,15 @@
+# До публикации домена и запуска индексации можно оставить Disallow: /
+# После проверки сайта замените на Allow: / и укажите полный URL sitemap.
+
 User-agent: *
+Disallow: /content/
+Disallow: /consents/
+Disallow: /_backup_before_final/
+Disallow: /docs/
+Disallow: /api/
+Disallow: /public/images/reviews/
+Disallow: /public/images/education/originals/
 Allow: /
 
-Sitemap: /sitemap.xml
+# После покупки домена раскомментируйте и подставьте адрес:
+# Sitemap: https://[ДОМЕН БУДЕТ УКАЗАН ПЕРЕД ПУБЛИКАЦИЕЙ]/sitemap.xml

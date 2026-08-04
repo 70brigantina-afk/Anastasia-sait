@@ -28,6 +28,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -146,6 +147,23 @@ a:hover {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+.section[id],
+.form-section[id],
+.reviews-section[id],
+.faq-section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-size: 0.92em;
+}
+
+.form-note--inline {
+  margin-top: 0.35rem;
 }
 
 .site-header {

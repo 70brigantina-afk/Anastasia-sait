@@ -231,9 +231,6 @@
     let ok = true;
     const name = String(form.name.value || "").trim();
     const contact = String(form.contact.value || "").trim();
-    const channel = String(form.channel.value || "").trim();
-    const time = String(form.time.value || "").trim();
-    const topic = String(form.topic.value || "").trim();
 
     if (!name) {
       showFieldError("name", "Укажите имя");
@@ -254,18 +251,6 @@
         ok = false;
       }
     }
-    if (!channel) {
-      showFieldError("channel", "Выберите способ связи");
-      ok = false;
-    }
-    if (!time) {
-      showFieldError("time", "Укажите удобное время");
-      ok = false;
-    }
-    if (!topic) {
-      showFieldError("topic", "Коротко опишите, что хотелось бы обсудить");
-      ok = false;
-    }
     if (!form.consent.checked) {
       showFieldError("consent", "Нужно согласие на обработку данных");
       ok = false;
@@ -274,8 +259,23 @@
   };
 
   if (form && status) {
+    const loadedAt = document.getElementById("form_loaded_at");
+    if (loadedAt) {
+      loadedAt.value = String(Date.now());
+    }
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      if (location.protocol === "file:") {
+        setStatus(
+          "В локальной версии отправка формы недоступна. После размещения на хостинге она будет работать. Сейчас можно написать Анастасии по электронной почте или в мессенджере: " +
+            contactErrorHtml() +
+            ".",
+          "info",
+        );
+        return;
+      }
 
       if (!validateForm()) {
         setStatus("Проверьте поля формы и подтвердите согласие.", "error");
@@ -299,11 +299,12 @@
       const payload = {
         name: String(form.name.value || "").trim(),
         contact: String(form.contact.value || "").trim(),
-        channel: String(form.channel.value || "").trim(),
-        time: String(form.time.value || "").trim(),
-        topic: String(form.topic.value || "").trim(),
+        channel: String(form.channel?.value || "").trim(),
+        time: String(form.time?.value || "").trim(),
+        topic: String(form.topic?.value || "").trim(),
         age_18: form.age.checked ? "да" : "нет",
         consent: form.consent.checked ? "да" : "нет",
+        form_loaded_at: String(loadedAt?.value || ""),
         source: "site-booking-form",
       };
 
