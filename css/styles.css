@@ -975,6 +975,47 @@ h3 {
   min-height: 1.35em;
 }
 
+.mail-compose {
+  position: relative;
+  flex: 1 0 100%;
+}
+
+.mail-compose > summary {
+  list-style: none;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.mail-compose > summary::-webkit-details-marker {
+  display: none;
+}
+
+.mail-compose__panel {
+  margin-top: 0.75rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.mail-compose__hint {
+  margin: 0 0 0.85rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  max-width: 36rem;
+}
+
+.mail-compose__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.mail-compose__links .contact-action {
+  min-height: 44px;
+}
+
 .channels-block {
   max-width: 40rem;
 }
