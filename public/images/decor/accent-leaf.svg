@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 170" fill="none">
+  <defs>
+    <filter id="line-relief" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.95" result="blur"/>
+      <feOffset in="blur" dx="1.25" dy="1.45" result="shOff"/>
+      <feFlood flood-color="#5c6562" flood-opacity="0.45" result="shColor"/>
+      <feComposite in="shColor" in2="shOff" operator="in" result="shadow"/>
+      <feOffset in="blur" dx="-1.15" dy="-1.25" result="hiOff"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.88" result="hiColor"/>
+      <feComposite in="hiColor" in2="hiOff" operator="in" result="highlight"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="highlight"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#line-relief)" stroke="#8a8174" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M65 155 C98 105, 106 52, 65 10 C24 52, 32 105, 65 155Z" stroke-width="1.45"/>
+    <path d="M65 148 V18" stroke-width="1.15"/>
+    <path d="M65 52 C82 60, 94 74, 98 92" stroke-width="0.95"/>
+    <path d="M65 52 C48 60, 36 74, 32 92" stroke-width="0.95"/>
+    <path d="M65 92 C78 100, 88 112, 92 128" stroke-width="0.85"/>
+    <path d="M65 92 C52 100, 42 112, 38 128" stroke-width="0.85"/>
+  </g>
+</svg>

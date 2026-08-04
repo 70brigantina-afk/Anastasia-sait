@@ -52,13 +52,151 @@
     });
   }
 
-  // MAX public link
+  // Яндекс.Метрика: подключается только если в config указан номер счётчика
+  const metrikaId = String(config.yandexMetrikaId || "").trim();
+  if (metrikaId && !document.getElementById("yandex-metrika")) {
+    (function (m, e, t, r, i, k, a) {
+      m[i] =
+        m[i] ||
+        function () {
+          (m[i].a = m[i].a || []).push(arguments);
+        };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return;
+        }
+      }
+      (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]);
+      k.async = 1;
+      k.src = r;
+      k.id = "yandex-metrika";
+      a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    window.ym(Number(metrikaId), "init", {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+    });
+  }
+
+  // Direct messenger / mail / channel links from config
+  const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
+  const mailSubject = encodeURIComponent("Запись на встречу-знакомство");
+  // Короткий mailto надёжнее длинного body: часть браузеров/ПК без почтового клиента
+  // «глотают» клик и кажется, что кнопка никуда не ведёт.
+  const mailHref = `mailto:${email}?subject=${mailSubject}`;
+  const whatsappUrl = String(config.whatsappUrl || "").trim();
+  const telegramUrl = String(config.telegramUrl || "").trim();
   const maxUrl = String(config.publicMaxUrl || "").trim();
-  const maxRow = document.querySelector("[data-max-row]");
-  const maxLink = document.querySelector("[data-max-link]");
-  if (maxUrl && maxRow && maxLink) {
-    maxLink.href = maxUrl;
-    maxRow.hidden = false;
+  const telegramChannelUrl = String(config.telegramChannelUrl || "").trim();
+  const maxChannelUrl = String(config.maxChannelUrl || "").trim();
+  const phoneHref = `tel:${String(config.phoneHref || "+79120435348").trim()}`;
+
+  const trackGoal = (name) => {
+    const id = String(config.yandexMetrikaId || "").trim();
+    if (!id || !name) return;
+    try {
+      if (typeof window.ym === "function") {
+        window.ym(Number(id), "reachGoal", name);
+      }
+    } catch (_) {
+      /* ignore */
+    }
+  };
+
+  const bindExternal = (selector, url, goal) => {
+    document.querySelectorAll(selector).forEach((link) => {
+      if (!url) {
+        link.hidden = true;
+        return;
+      }
+      link.href = url;
+      link.hidden = false;
+      if (!link.getAttribute("href")?.startsWith("mailto:") && !link.getAttribute("href")?.startsWith("tel:")) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
+      link.removeAttribute("aria-disabled");
+      link.classList.remove("is-disabled");
+      if (goal) {
+        link.addEventListener("click", () => trackGoal(goal));
+      }
+    });
+  };
+
+  const showMailHint = (link) => {
+    const status = link.closest("[data-contact-actions]")?.querySelector("[data-copy-status]");
+    if (!status) return;
+    status.textContent = `Адрес ${email} скопирован. Если окно письма не открылось, вставьте его в свою почту.`;
+    status.classList.add("is-visible");
+    window.setTimeout(() => {
+      status.classList.remove("is-visible");
+      status.textContent = "";
+    }, 5000);
+  };
+
+  document.querySelectorAll("[data-mail-link]").forEach((link) => {
+    link.setAttribute("href", mailHref);
+    link.removeAttribute("target");
+    link.removeAttribute("aria-disabled");
+    link.classList.remove("is-disabled");
+    link.addEventListener("click", async () => {
+      trackGoal("click_email");
+      try {
+        await navigator.clipboard.writeText(email);
+        showMailHint(link);
+      } catch (_) {
+        const status = link.closest("[data-contact-actions]")?.querySelector("[data-copy-status]");
+        if (status) {
+          status.textContent = `Напишите на ${email}`;
+          status.classList.add("is-visible");
+        }
+      }
+    });
+  });
+  bindExternal("[data-whatsapp-link]", whatsappUrl, "click_whatsapp");
+  bindExternal("[data-telegram-link]", telegramUrl, "click_telegram");
+  bindExternal("[data-max-link]", maxUrl, "click_max");
+  bindExternal("[data-telegram-channel]", telegramChannelUrl, "click_telegram_channel");
+  bindExternal("[data-max-channel]", maxChannelUrl, "click_max_channel");
+  document.querySelectorAll("[data-phone-link]").forEach((link) => {
+    link.setAttribute("href", phoneHref);
+    link.addEventListener("click", () => trackGoal("click_phone"));
+  });
+  document.querySelectorAll("[data-practices-link]").forEach((link) => {
+    link.addEventListener("click", () => trackGoal("open_practices"));
+  });
+
+  const pricing = document.getElementById("pricing");
+  if (pricing && "IntersectionObserver" in window) {
+    const po = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            trackGoal("view_pricing");
+            po.disconnect();
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+    po.observe(pricing);
+  }
+
+  const bookingFormEl = document.getElementById("booking-form");
+  if (bookingFormEl) {
+    let formStarted = false;
+    bookingFormEl.addEventListener(
+      "focusin",
+      () => {
+        if (!formStarted) {
+          formStarted = true;
+          trackGoal("form_start");
+        }
+      },
+      true,
+    );
   }
 
   // Copy buttons
@@ -93,6 +231,21 @@
   const RATE_LIMIT_MS = 45000;
   let lastSubmitAt = 0;
 
+  const contactErrorHtml = () => {
+    const parts = [];
+    if (telegramUrl) {
+      parts.push(`<a href="${telegramUrl}" target="_blank" rel="noopener noreferrer">Telegram</a>`);
+    }
+    if (maxUrl) {
+      parts.push(`<a href="${maxUrl}" target="_blank" rel="noopener noreferrer">MAX</a>`);
+    }
+    if (whatsappUrl) {
+      parts.push(`<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`);
+    }
+    parts.push(`<a href="mailto:${email}">${email}</a>`);
+    return parts.join(", ");
+  };
+
   const setStatus = (html, type) => {
     if (!status) return;
     status.innerHTML = html;
@@ -101,17 +254,6 @@
     status.classList.toggle("is-error", type === "error");
     status.classList.toggle("is-info", type === "info");
   };
-
-  const endpointReady = Boolean(String(config.formEndpoint || "").trim());
-  if (form && status && !endpointReady) {
-    const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
-    setStatus(
-      "Форму можно заполнить, но онлайн-отправка пока не подключена. Напишите на " +
-        `<a href="mailto:${email}">${email}</a>` +
-        " или позвоните по телефону выше.",
-      "info"
-    );
-  }
 
   const clearFieldErrors = () => {
     form?.querySelectorAll(".field-error").forEach((el) => {
@@ -189,10 +331,8 @@
 
       const honey = String(form.botcheck?.value || "");
       if (honey) {
-        setStatus(
-          "Спасибо. Заявка отправлена. Анастасия свяжется с вами, чтобы согласовать встречу-знакомство.",
-          "success"
-        );
+        form.reset();
+        clearFieldErrors();
         return;
       }
 
@@ -215,12 +355,11 @@
       };
 
       if (!endpoint) {
-        const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
         setStatus(
-          "Онлайн-отправка формы пока не подключена. Напишите на " +
-            `<a href="mailto:${email}">${email}</a>` +
-            " или позвоните — так заявка дойдёт быстрее всего.",
-          "info"
+          "Не удалось отправить заявку. Напишите Анастасии в " +
+            contactErrorHtml() +
+            ".",
+          "error",
         );
         return;
       }
@@ -242,27 +381,31 @@
           body: JSON.stringify(payload),
         });
 
-        if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.ok === false) {
           throw new Error("send_failed");
         }
 
         lastSubmitAt = Date.now();
         form.reset();
         clearFieldErrors();
+        trackGoal("form_success");
         setStatus(
-          "Спасибо. Заявка отправлена. Анастасия свяжется с вами, чтобы согласовать встречу-знакомство.",
-          "success"
+          "Спасибо, заявка отправлена. Анастасия свяжется с вами, чтобы согласовать встречу-знакомство.",
+          "success",
         );
       } catch (error) {
         setStatus(
-          "Не удалось отправить заявку. Попробуйте ещё раз или напишите на " +
-            `<a href="mailto:${String(config.notifyEmail || "nasti.kom@mail.ru").trim()}">${String(config.notifyEmail || "nasti.kom@mail.ru").trim()}</a>.`,
-          "error"
+          "Не удалось отправить заявку. Напишите Анастасии в " +
+            contactErrorHtml() +
+            ".",
+          "error",
         );
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = submitBtn.dataset.originalText || "Отправить запрос на знакомство";
+          submitBtn.textContent =
+            submitBtn.dataset.originalText || "Отправить запрос на знакомство";
         }
       }
     });
