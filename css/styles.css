@@ -1059,6 +1059,23 @@ h3 {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 }
 
+.format-text {
+  max-width: 920px;
+}
+
+.practices-teaser {
+  max-width: 40rem;
+}
+
+.practices-teaser h2 {
+  margin-bottom: 0.75rem;
+}
+
+.practices-teaser p {
+  margin: 0 0 1.15rem;
+  color: var(--ink-soft);
+}
+
 .format-media {
   display: flex;
   align-items: center;

@@ -267,9 +267,19 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
+      if (submitBtn?.disabled || submitBtn?.getAttribute("aria-disabled") === "true") {
+        setStatus(
+          "Отправка формы временно недоступна. Напишите Анастасии напрямую: " +
+            contactErrorHtml() +
+            ".",
+          "info",
+        );
+        return;
+      }
+
       if (location.protocol === "file:") {
         setStatus(
-          "В локальной версии отправка формы недоступна. После размещения на хостинге она будет работать. Сейчас можно написать Анастасии по электронной почте или в мессенджере: " +
+          "В локальной версии отправка формы недоступна. После размещения на хостинге и настройки доставки заявок она сможет работать. Сейчас можно написать Анастасии по электронной почте или в мессенджере: " +
             contactErrorHtml() +
             ".",
           "info",
@@ -346,7 +356,7 @@
         trackGoal("form_success");
         setStatus(
           "Спасибо, заявка отправлена. Анастасия свяжется с вами, чтобы согласовать встречу-знакомство.",
-          "success",
+          "success"
         );
       } catch (error) {
         setStatus(

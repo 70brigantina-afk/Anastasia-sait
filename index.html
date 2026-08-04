@@ -354,7 +354,7 @@
 
       <section class="section section--alt" id="format">
         <div class="motif motif--feather" aria-hidden="true"></div>
-        <div class="container format-grid">
+        <div class="container format-text">
           <div class="reveal">
             <div class="section-head">
               <p class="eyebrow">Запись</p>
@@ -363,7 +363,7 @@
                 Сначала короткая заявка и знакомство. Полноценная консультация — 60 минут онлайн в MAX.
               </p>
             </div>
-                        <ol class="steps">
+            <ol class="steps">
               <li>
                 <div>
                   <strong>Короткая заявка</strong>
@@ -389,32 +389,6 @@
                 </div>
               </li>
             </ol>
-          </div>
-          <div class="format-media reveal">
-            <div class="media-frame">
-              <picture>
-                <source
-                  type="image/webp"
-                  srcset="
-                    public/images/anastasia/optimized/format-full-480.webp?v=8 480w,
-                    public/images/anastasia/optimized/format-full-682.webp?v=8 682w
-                  "
-                  sizes="(max-width: 900px) 70vw, 320px"
-                />
-                <img
-                  src="public/images/anastasia/optimized/format-full-682.jpg?v=8"
-                  srcset="
-                    public/images/anastasia/optimized/format-full-480.jpg?v=8 480w,
-                    public/images/anastasia/optimized/format-full-682.jpg?v=8 682w
-                  "
-                  sizes="(max-width: 900px) 70vw, 320px"
-                  width="682"
-                  height="1023"
-                  alt="Анастасия Сафарова в полный рост"
-                  loading="lazy"
-                />
-              </picture>
-            </div>
           </div>
         </div>
       </section>
@@ -465,11 +439,17 @@
               встречу можно один раз перенести на другое согласованное время.
             </p>
             <p>
-              При более поздней отмене или неявке возврат рассчитывается с учётом фактически
-              понесённых исполнителем расходов в соответствии с законодательством. Если встречу
-              отменяет психолог, клиентка может выбрать другое время или получить полный возврат.
+              При более поздней отмене или неявке вопрос возврата оплаты решается с учётом фактически
+              понесённых исполнителем расходов и требований действующего законодательства.
             </p>
-            <p class="note"><a href="rules.html">Полные правила записи и оплаты</a></p>
+            <p>
+              Если встречу отменяет психолог, клиентка может выбрать другое время или получить полный
+              возврат оплаты.
+            </p>
+            <p class="note">
+              Полные правила показываются до оплаты.
+              <a href="rules.html">Правила записи и оплаты</a>
+            </p>
           </div>
                   <p class="section-cta reveal">
             <a class="button button-primary" href="#booking">Записаться на бесплатное знакомство</a>
@@ -556,7 +536,22 @@
         </div>
       </section>
 
-            <section class="form-section" id="booking">
+      <section class="section section--soft" id="extra-practices">
+        <div class="container practices-teaser reveal">
+          <h2>Дополнительные практики</h2>
+          <p>
+            Отдельно от психологических консультаций Анастасия работает с метафорическими
+            ассоциативными картами, Таро, „Матрицей судьбы“ и ведической нумерологией. Это
+            самостоятельные форматы: они не входят в психологическую консультацию и не заменяют
+            помощь психолога, врача или другого профильного специалиста.
+          </p>
+          <a class="button button-secondary" href="practices.html" data-practices-link
+            >Посмотреть дополнительные практики</a
+          >
+        </div>
+      </section>
+
+      <section class="form-section" id="booking">
         <div class="motif motif--lotus" aria-hidden="true"></div>
         <div class="motif motif--feather" aria-hidden="true"></div>
         <div class="container form-layout">
@@ -635,13 +630,14 @@
               <p class="field-error" data-error-for="time"></p>
             </div>
 
+            <p class="form-note form-note--inline">
+              Не указывайте диагнозы, сведения о ребёнке, медицинские документы, адреса и подробности
+              травмирующих событий.
+            </p>
+
             <div class="field">
               <label for="topic">Что сейчас хотелось бы обсудить? <span class="optional">(необязательно)</span></label>
               <textarea id="topic" name="topic"></textarea>
-              <p class="form-note form-note--inline">
-                Не указывайте диагнозы, сведения о ребёнке, медицинские документы, адреса и подробности
-                травмирующих событий.
-              </p>
               <p class="field-error" data-error-for="topic"></p>
             </div>
 
@@ -656,14 +652,21 @@
             <p class="field-error" data-error-for="consent"></p>
 
             <p class="form-note">
-              В форме не нужно указывать диагноз, медицинские документы, адрес, паспортные данные или
-              подробности травмирующей ситуации. Ознакомиться с
-              <a href="privacy.html">политикой</a> и <a href="rules.html">правилами записи</a>.
+              <a href="privacy.html">Политика обработки персональных данных</a>
+              ·
+              <a href="rules.html">Правила записи</a>
             </p>
 
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
 
-            <button class="button button-primary" type="submit">Отправить запрос на знакомство</button>
+            <button class="button button-primary" type="submit" disabled aria-disabled="true">
+              Отправить запрос на знакомство
+            </button>
+            <p class="form-note" id="form-disabled-note">
+              Отправка формы временно отключена: на сервере ещё не подтверждён способ доставки заявок
+              (хостинг и почтовый сервис). Напишите Анастасии напрямую по электронной почте, в Telegram,
+              MAX или WhatsApp — ссылки выше.
+            </p>
           </form>
         </div>
       </section>
