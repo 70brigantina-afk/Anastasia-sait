@@ -99,7 +99,19 @@
     status.classList.add("is-visible");
     status.classList.toggle("is-success", type === "success");
     status.classList.toggle("is-error", type === "error");
+    status.classList.toggle("is-info", type === "info");
   };
+
+  const endpointReady = Boolean(String(config.formEndpoint || "").trim());
+  if (form && status && !endpointReady) {
+    const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
+    setStatus(
+      "Форму можно заполнить, но онлайн-отправка пока не подключена. Напишите на " +
+        `<a href="mailto:${email}">${email}</a>` +
+        " или позвоните по телефону выше.",
+      "info"
+    );
+  }
 
   const clearFieldErrors = () => {
     form?.querySelectorAll(".field-error").forEach((el) => {
@@ -203,10 +215,12 @@
       };
 
       if (!endpoint) {
+        const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
         setStatus(
-          "Не удалось отправить заявку. Попробуйте ещё раз или напишите на " +
-            '<a href="mailto:nasti.kom@mail.ru">nasti.kom@mail.ru</a>.',
-          "error"
+          "Онлайн-отправка формы пока не подключена. Напишите на " +
+            `<a href="mailto:${email}">${email}</a>` +
+            " или позвоните — так заявка дойдёт быстрее всего.",
+          "info"
         );
         return;
       }
@@ -242,7 +256,7 @@
       } catch (error) {
         setStatus(
           "Не удалось отправить заявку. Попробуйте ещё раз или напишите на " +
-            '<a href="mailto:nasti.kom@mail.ru">nasti.kom@mail.ru</a>.',
+            `<a href="mailto:${String(config.notifyEmail || "nasti.kom@mail.ru").trim()}">${String(config.notifyEmail || "nasti.kom@mail.ru").trim()}</a>.`,
           "error"
         );
       } finally {
