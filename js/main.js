@@ -80,8 +80,12 @@
     });
   }
 
-  // Direct messenger / channel links from config
+  // Direct messenger / mail / channel links from config
   const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
+  const mailComposeUrl = String(
+    config.mailComposeUrl ||
+      `https://e.mail.ru/compose/?to=${encodeURIComponent(email)}`,
+  ).trim();
   const whatsappUrl = String(config.whatsappUrl || "").trim();
   const telegramUrl = String(config.telegramUrl || "").trim();
   const maxUrl = String(config.publicMaxUrl || "").trim();
@@ -121,6 +125,8 @@
     });
   };
 
+  // Одна кнопка — сразу страница написания письма, без меню и без копирования
+  bindExternal("[data-mail-link]", mailComposeUrl, "click_email");
   bindExternal("[data-whatsapp-link]", whatsappUrl, "click_whatsapp");
   bindExternal("[data-telegram-link]", telegramUrl, "click_telegram");
   bindExternal("[data-max-link]", maxUrl, "click_max");
@@ -165,44 +171,6 @@
     );
   }
 
-  // Copy buttons (почта — копируем адрес, без выбора Mail.ru/Gmail/Яндекс)
-  document.querySelectorAll("[data-copy]").forEach((button) => {
-    button.addEventListener("click", async () => {
-      const value = button.getAttribute("data-copy") || "";
-      const label = button.getAttribute("data-copy-label") || "Скопировано";
-      const status =
-        button.closest("[data-contact-actions]")?.querySelector("[data-copy-status]") ||
-        button.parentElement?.querySelector("[data-copy-status]");
-      if (value.includes("@")) {
-        trackGoal("click_email");
-      }
-      try {
-        await navigator.clipboard.writeText(value);
-        if (status) {
-          status.textContent = label;
-          status.classList.add("is-visible");
-          window.setTimeout(() => {
-            status.classList.remove("is-visible");
-            status.textContent = "";
-          }, 3200);
-        } else {
-          const original = button.textContent;
-          button.textContent = label;
-          window.setTimeout(() => {
-            button.textContent = original;
-          }, 2200);
-        }
-      } catch (error) {
-        if (status) {
-          status.textContent = "Не удалось скопировать. Выделите адрес вручную: " + value;
-          status.classList.add("is-visible");
-        } else {
-          window.prompt("Скопируйте адрес почты:", value);
-        }
-      }
-    });
-  });
-
   // Booking form
   const form = document.getElementById("booking-form");
   const status = document.getElementById("form-status");
@@ -221,7 +189,13 @@
     if (whatsappUrl) {
       parts.push(`<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`);
     }
-    parts.push(email);
+    if (mailComposeUrl) {
+      parts.push(
+        `<a href="${mailComposeUrl}" target="_blank" rel="noopener noreferrer">${email}</a>`,
+      );
+    } else {
+      parts.push(email);
+    }
     return parts.join(", ");
   };
 
