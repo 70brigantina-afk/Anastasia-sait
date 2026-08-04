@@ -80,18 +80,8 @@
     });
   }
 
-  // Direct messenger / mail / channel links from config
+  // Direct messenger / channel links from config
   const email = String(config.notifyEmail || "nasti.kom@mail.ru").trim();
-  const mailSubject = encodeURIComponent("Запись на встречу-знакомство");
-  const mailBody = encodeURIComponent(
-    "Здравствуйте! Хочу записаться на встречу-знакомство.",
-  );
-  // Веб-почта вместо mailto: на многих ПК mailto открывает пустую вкладку браузера.
-  const mailWebUrls = {
-    mailru: `https://e.mail.ru/compose/?to=${encodeURIComponent(email)}&subject=${mailSubject}&body=${mailBody}`,
-    yandex: `https://mail.yandex.ru/compose?to=${encodeURIComponent(email)}&subject=${mailSubject}`,
-    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${mailSubject}&body=${mailBody}`,
-  };
   const whatsappUrl = String(config.whatsappUrl || "").trim();
   const telegramUrl = String(config.telegramUrl || "").trim();
   const maxUrl = String(config.publicMaxUrl || "").trim();
@@ -130,26 +120,6 @@
       }
     });
   };
-
-  document.querySelectorAll("[data-mail-web]").forEach((link) => {
-    const key = link.getAttribute("data-mail-web") || "mailru";
-    const url = mailWebUrls[key] || mailWebUrls.mailru;
-    link.setAttribute("href", url);
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.addEventListener("click", () => trackGoal("click_email"));
-  });
-
-  // Старые mailto-ссылки тоже ведём в веб-почту Mail.ru (письмо в браузере)
-  document.querySelectorAll("[data-mail-link], a[href^='mailto:']").forEach((link) => {
-    if (link.hasAttribute("data-mail-web")) return;
-    link.setAttribute("href", mailWebUrls.mailru);
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.removeAttribute("aria-disabled");
-    link.classList.remove("is-disabled");
-    link.addEventListener("click", () => trackGoal("click_email"));
-  });
 
   bindExternal("[data-whatsapp-link]", whatsappUrl, "click_whatsapp");
   bindExternal("[data-telegram-link]", telegramUrl, "click_telegram");
@@ -195,12 +165,17 @@
     );
   }
 
-  // Copy buttons
+  // Copy buttons (почта — копируем адрес, без выбора Mail.ru/Gmail/Яндекс)
   document.querySelectorAll("[data-copy]").forEach((button) => {
     button.addEventListener("click", async () => {
       const value = button.getAttribute("data-copy") || "";
       const label = button.getAttribute("data-copy-label") || "Скопировано";
-      const status = button.closest("[data-contact-actions]")?.querySelector("[data-copy-status]");
+      const status =
+        button.closest("[data-contact-actions]")?.querySelector("[data-copy-status]") ||
+        button.parentElement?.querySelector("[data-copy-status]");
+      if (value.includes("@")) {
+        trackGoal("click_email");
+      }
       try {
         await navigator.clipboard.writeText(value);
         if (status) {
@@ -209,12 +184,20 @@
           window.setTimeout(() => {
             status.classList.remove("is-visible");
             status.textContent = "";
+          }, 3200);
+        } else {
+          const original = button.textContent;
+          button.textContent = label;
+          window.setTimeout(() => {
+            button.textContent = original;
           }, 2200);
         }
       } catch (error) {
         if (status) {
-          status.textContent = "Не удалось скопировать. Выделите текст вручную.";
+          status.textContent = "Не удалось скопировать. Выделите адрес вручную: " + value;
           status.classList.add("is-visible");
+        } else {
+          window.prompt("Скопируйте адрес почты:", value);
         }
       }
     });
@@ -238,9 +221,7 @@
     if (whatsappUrl) {
       parts.push(`<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer">WhatsApp</a>`);
     }
-    parts.push(
-      `<a href="${mailWebUrls.mailru}" target="_blank" rel="noopener noreferrer">${email}</a>`,
-    );
+    parts.push(email);
     return parts.join(", ");
   };
 
