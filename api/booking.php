@@ -109,8 +109,10 @@ $contact = trim((string)($data['contact'] ?? ''));
 $channel = trim((string)($data['channel'] ?? ''));
 $time = trim((string)($data['time'] ?? ''));
 $topic = trim((string)($data['topic'] ?? ''));
-$ageOk = !empty($data['age_18']) || !empty($data['age']);
-$consent = !empty($data['consent']);
+$ageOk = in_array(strtolower(trim((string)($data['age_18'] ?? ''))), ['да', 'yes', '1', 'true'], true)
+    || !empty($data['age']);
+$consentRaw = strtolower(trim((string)($data['consent'] ?? '')));
+$consent = in_array($consentRaw, ['да', 'yes', '1', 'true'], true);
 
 $errors = [];
 if ($name === '' || mb_strlen($name) > 120) {
