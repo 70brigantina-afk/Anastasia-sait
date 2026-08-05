@@ -231,25 +231,30 @@
     let ok = true;
     const name = String(form.name.value || "").trim();
     const contact = String(form.contact.value || "").trim();
+    const channel = form.querySelector('input[name="channel"]:checked');
 
     if (!name) {
       showFieldError("name", "Укажите имя");
       ok = false;
     }
-    if (!form.age.checked) {
-      showFieldError("age", "Нужно подтверждение возраста 18+");
+    if (!channel) {
+      showFieldError("channel", "Выберите способ связи");
       ok = false;
     }
     if (!contact) {
-      showFieldError("contact", "Укажите телефон или почту");
+      showFieldError("contact", "Укажите телефон или username");
       ok = false;
     } else {
-      const looksEmail = contact.includes("@");
+      const looksHandle = /@|[A-Za-zА-Яа-я]/.test(contact) && contact.length >= 3;
       const looksPhone = /\d{10,}/.test(contact.replace(/\D/g, ""));
-      if (!looksEmail && !looksPhone) {
-        showFieldError("contact", "Проверьте телефон или адрес почты");
+      if (!looksHandle && !looksPhone) {
+        showFieldError("contact", "Проверьте телефон или username");
         ok = false;
       }
+    }
+    if (!form.age.checked) {
+      showFieldError("age", "Нужно подтверждение возраста 18+");
+      ok = false;
     }
     if (!form.consent.checked) {
       showFieldError("consent", "Нужно согласие на обработку данных");
@@ -264,16 +269,22 @@
       loadedAt.value = String(Date.now());
     }
 
+    let submitting = false;
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.removeAttribute("aria-disabled");
+    }
+
+    const disabledNote = document.getElementById("form-disabled-note");
+    if (disabledNote) {
+      disabledNote.hidden = true;
+    }
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      if (submitBtn?.disabled || submitBtn?.getAttribute("aria-disabled") === "true") {
-        setStatus(
-          "Отправка формы временно недоступна. Напишите Анастасии напрямую: " +
-            contactErrorHtml() +
-            ".",
-          "info",
-        );
+      if (submitting) {
         return;
       }
 
@@ -306,11 +317,13 @@
       }
 
       const endpoint = String(config.formEndpoint || "").trim();
+      const channelValue =
+        form.querySelector('input[name="channel"]:checked')?.value || "";
       const payload = {
         name: String(form.name.value || "").trim(),
         contact: String(form.contact.value || "").trim(),
-        channel: String(form.channel?.value || "").trim(),
-        time: String(form.time?.value || "").trim(),
+        channel: String(channelValue).trim(),
+        time: "",
         topic: String(form.topic?.value || "").trim(),
         age_18: form.age.checked ? "да" : "нет",
         consent: form.consent.checked ? "да" : "нет",
@@ -328,6 +341,7 @@
         return;
       }
 
+      submitting = true;
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.dataset.originalText = submitBtn.textContent || "";
@@ -353,11 +367,11 @@
         lastSubmitAt = Date.now();
         form.reset();
         clearFieldErrors();
+        if (loadedAt) {
+          loadedAt.value = String(Date.now());
+        }
         trackGoal("form_success");
-        setStatus(
-          "Спасибо, заявка отправлена. Анастасия свяжется с вами, чтобы согласовать встречу-знакомство.",
-          "success"
-        );
+        setStatus("Спасибо! Анастасия свяжется с вами в ближайшее время.", "success");
       } catch (error) {
         setStatus(
           "Не удалось отправить заявку. Напишите Анастасии в " +
@@ -366,10 +380,10 @@
           "error",
         );
       } finally {
+        submitting = false;
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent =
-            submitBtn.dataset.originalText || "Отправить запрос на знакомство";
+          submitBtn.textContent = submitBtn.dataset.originalText || "Отправить заявку";
         }
       }
     });
